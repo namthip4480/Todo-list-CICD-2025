@@ -62,3 +62,60 @@ https://github.com/namthip4480/flask-todo-cicd.git
          assert get_todo_by_id(todo.id) is None
      ```
    - การอธิบาย: ทดสอบว่าฟังก์ชันสามารถลบ Todo ตาม id ได้สำเร็จและตรวจสอบว่าไม่มีในฐานข้อมูลแล้ว
+
+## ส่วนที่ 10: การทดสอบและประเมินผล
+
+### 10.1 Checklist การทดลอง
+
+ตรวจสอบว่าทำสำเร็จทุกข้อ:
+
+- [/] สร้าง GitHub repository และ clone ลงเครื่อง
+- [/] สร้าง Flask application ที่มี CRUD operations ครบถ้วน
+- [/] เขียน tests ที่ครอบคลุม code coverage > 80%
+- [/] สร้าง Dockerfile ที่ optimize แล้ว
+- [/] สร้าง docker-compose.yml ที่แยก services
+- [/] รัน application ด้วย Docker และทดสอบใน local สำเร็จ
+- [/] สร้าง GitHub Actions workflow ที่มีทั้ง CI และ CD
+- [ ] Deploy ไปยัง Render สำเร็จ
+- [ ] Deploy ไปยัง Railway สำเร็จ
+- [ ] ทดสอบ API endpoints บน production
+- [ ] Health checks ทำงานถูกต้อง
+- [ ] Auto-deployment ทำงานเมื่อ push code ใหม่
+
+### 10.2 คำถามทบทวน
+
+1. **Docker Architecture**
+- **เหตุผลที่แยก Database และ Application เป็น container แยก**
+  - Isolation: ปัญหาของ container หนึ่งไม่กระทบอีกตัว
+  - Scalability: สามารถ scale app หลาย instance โดยไม่กระทบ database
+  - Maintainability: อัปเดต/เปลี่ยน database version ง่าย
+  - Security: จำกัดสิทธิ์การเข้าถึงระหว่าง container
+  - Reusability: Database container ใช้ร่วมกับหลาย app ได้
+- **ประโยชน์ของ Multi-stage build**
+  - ลดขนาด image (build tools ไม่อยู่ใน production)
+  - เพิ่มความปลอดภัย (ไม่มี source code หรือ build tools ใน runtime)
+  - จัดการ dependencies ได้ดี (แยก build กับ runtime)
+
+2. **Testing Strategy**
+- **ความสำคัญของ Code Coverage**
+  - วัดความสมบูรณ์ของการทดสอบ
+  - ลดโอกาส bug ใน production
+  - ช่วยปรับปรุงคุณภาพโค้ด (refactor จุดซับซ้อน)
+  - ช่วยทีม maintain codebase
+  > Coverage สูง ≠ test logic ดี ต้องดูคุณภาพ test ด้วย
+
+3. **Deployment**
+- **เหตุผลที่ Health check endpoint สำคัญ**
+  - ตรวจสอบ container/instance ว่ายังทำงานปกติ
+  - Load balancer ส่ง traffic ไปเฉพาะ instance ที่ healthy
+  - ใช้สำหรับ monitoring uptime
+- **ความแตกต่าง Render vs Railway**
+  | Feature | Render | Railway |
+  |---------|--------|---------|
+  | Focus | Web service / static site / cron jobs / DB | Web app + DB + background services |
+  | Ease of use | GUI + Git deploy, auto HTTPS | GUI + Git deploy, microservices focus |
+  | Database support | Postgres, MySQL, Redis | Postgres, MySQL, Redis, MongoDB |
+  | Scaling | Manual & Auto | Mostly manual (auto on Pro plan) |
+  | Pricing | Free tier + Paid scale easily | Free tier limited, Paid flexible |
+  - **Render:** เหมาะเว็บ/static app + auto HTTPS + cron jobs
+  - **Railway:** เหมาะ microservices + DB + prototypes
