@@ -3,7 +3,7 @@
 ---
 
 ## Repo code
-[GitHub Repository](https://github.com/namthip4480/flask-todo-cicd.git)
+[[GitHub Repository](https://github.com/namthip4480/flask-todo-cicd.git)](https://github.com/namthip4480/flask-todo-cicd.git)
 
 ## แนบรูปผลการทดลองการทดสอบระบบ
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/30e294da-0319-46f2-95d6-16a6465c9b28" />
