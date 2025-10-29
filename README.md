@@ -7,6 +7,9 @@ https://github.com/namthip4480/flask-todo-cicd.git
 
 ## แนบรูปผลการทดลองการทดสอบระบบ
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/30e294da-0319-46f2-95d6-16a6465c9b28" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/55318e31-27e8-4588-8efd-c198ca05f994" />
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a1aedb94-a55f-4bc7-a955-292413a96692" />
 
 ---
